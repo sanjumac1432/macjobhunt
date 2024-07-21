@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="image/FeviconLogo.svg">
+  <title>Workaholics</title>
+  <script src="https://kit.fontawesome.com/52ca9e0df4.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body onload="viewApplicants()">
+  <header>
+    <nav class="navbar navbar-expand-lg">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="index.html"><img src="image/LOGO.svg" alt="Logo"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav mx-auto">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="index.html">HOME</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="addjob.html"> ADD JOBS</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="myjobs.html">MY JOBS</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">EMPLOYEES</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="profile.html">PROFILE</a>
+            </li>
+
+          </ul>
+          <a class="nav-link logout2" href="login.html">LOGOUT</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+
+  <!-- Application section start -->
+  <section class="cardApplications">
+    <div class="container">
+      <div class="row" id="disApplicants"></div>
+    </div>
+  </section>
+
+
+
+  <!-- Application section End -->
+
+
+  <script>
+
+    const viewApplicants = () => {
+      
+      const urlParams = new URLSearchParams(window.location.search);
+      const myParam = urlParams.get('myParam');
+      console.log(myParam)
+      let t = JSON.parse(localStorage.getItem("token")).token;
+
+      fetch(`http://localhost:4444/api/applicants?jobId=${myParam}&desc=dateOfApplication`, {
+        
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: ` Bearer ${t}`,
+        },
+      })
+        .then((y) => y.json())
+        .then((y) => {
+          console.log(y)
+          disApplicants(y)
+        });
+    };
+
+
+    const disApplicants = (y) => {
+      let d = y.map((value, index) => {
+        return `<div class=" col-auto">
+      <div class="row">
+       
+        <div class="col ApplicationsText">
+          <h2>Application Details</h2>
+          <h4>${value.jobApplicant.name}</h4>
+            <div><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+          <p><i class="fa-regular fa-circle-check"></i> <span>Applied on:</span> 4/10/2024</p>
+          <p><i class="fa-regular fa-circle-check"></i> <span>Education:</span> Unpad(2020-2024)</p>
+          <p><i class="fa-regular fa-circle-check"></i> <span>SOP:</span> Available</p>
+          <button class="btn btn-success me-4">Shortlist</button> <button class="btn btn-danger">Reject</button>
+          <button class="btn upload"><i class="fa-solid fa-cloud-arrow-down"></i> Download</button>
+        </div>
+      </div>
+    </div>`
+      })
+
+      document.getElementById('disApplicants').innerHTML = d.join(" ")
+    }
+
+
+    // code for reject candidate 
+
+fetch(`http://localhost:4444/api/applications/${_id}`,{
+
+})
+
+
+    const status = ()=>{
+
+    }
+
+
+
+  </script>
+
+
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/script.js"></script>
+</body>
+
+</html>

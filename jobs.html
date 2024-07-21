@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://kit.fontawesome.com/52ca9e0df4.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body onload="myJobs()">
+    <header>
+        <nav class="navbar navbar-expand-lg">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.html"><img src="image/LOGO.svg" alt="Logo"></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="jobs.html">HOME</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="applicantapplication.html">APPLICATION</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="applicantprofile.html">PROFILE</a>
+                        </li>
+
+                    </ul>
+                    <a class="nav-link logout2" href="login.html">LOGOUT</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <section class="Jobs">
+        <div class="container text-center p-4">
+            <h1 class="display-5 text-center ">My Jobs</h1>
+            <form class="d-flex col-lg-4 col-md-5 mx-auto" role="search">
+                <input class="form-control" type="search" id="search" placeholder="Search" aria-label="Search">
+                <button type="button" class="btn"><i class="fa-solid fa-magnifying-glass"
+                        onclick="search()"></i></button>
+
+
+                <!-- Button trigger modal -->
+                <button type="button" class="lines" data-bs-toggle="modal" data-bs-target="#exampleModalSS"
+                    data-bs-whatever="filter">
+                    <div class="line"></div>
+                    <div class="line"></div>
+                    <div class="line"></div>
+
+                </button>
+            </form>
+
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModalSS" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="FilterForm" name="FilterForm" action="#">
+                                <div class="row CheckboxRow">
+                                    <div class="col-md-3">
+                                        <h2 class="therdH">Job Type</h2>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <div>
+                                            <input class="form-check-input mt-0" id="FullTime" name="FullTime"
+                                                type="checkbox" value="Full%20Time"
+                                                aria-label="Checkbox for following text input">
+                                            <label for="FullTime">Full Time</label>
+                                        </div>
+                                        <div>
+                                            <input class="form-check-input mt-0" id="PartTime" name="PartTime"
+                                                type="checkbox" value="Part%20Time"
+                                                aria-label="Checkbox for following text input">
+                                            <label for="PartTime">Part Time</label>
+                                        </div>
+                                        <div>
+                                            <input class="form-check-input mt-0" id="WorkFromHome" name="WorkFromHome"
+                                                type="checkbox" value="Work%20From%20Home"
+                                                aria-label="Checkbox for following text input">
+                                            <label for="WorkFromHome">Work From Home</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+
+                                        <label class="therdH" for="quantity">Salary</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="number" id="quantity" name="quantity" min="0" max="100000"
+                                            placeholder="min salary">
+                                        <input type="number" id="quantity2" name="quantity2" min="0" max="100000"
+                                            placeholder="max salary">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+
+                                        <label class="therdH" for="Duration">Duration</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <select name="Duration" id="Duration">
+                                            <option selected disabled value="">Select</option>
+                                            <option value="1">1 Months</option>
+                                            <option value="2">2 Months</option>
+                                            <option value="3">3 Months</option>
+                                            <option value="4">4 Months</option>
+                                            <option value="5">5 Months</option>
+                                            <option value="6">6 Months</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row CheckboxRow">
+                                    <div class="col-md-3">
+                                        <h2 class="therdH">Sort</h2>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <div>
+                                            <input class="form-check-input mt-0" id="Salary" name="Salary"
+                                                type="checkbox" value="salary"
+                                                aria-label="Checkbox for following text input">
+                                            <label for="Salary">Salary</label>
+                                        </div>
+                                        <div>
+                                            <input class="form-check-input mt-0" id="CheckDuration" name="CheckDuration"
+                                                type="checkbox" value="duration"
+                                                aria-label="Checkbox for following text input">
+                                            <label for="CheckDuration">Duration</label>
+                                        </div>
+                                        <div>
+                                            <input class="form-check-input mt-0" id="Rating" name="Rating"
+                                                type="checkbox" value="rating"
+                                                aria-label="Checkbox for following text input">
+                                            <label for="Rating">Rating</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            <!-- <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input"> -->
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" for="FilterForm" class="btn btn-primary" data-bs-dismiss="modal"
+                                onclick="filterData(event)">APPLY</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+        </div>
+    </section>
+    <!-- My job Section End -->
+    <!-- card section start -->
+    <section class="MyjobCard">
+        <div class="container">
+            <div class="row d-flex justify-content-between p-4" id="display">
+                <div class="col-lg-6  textpart ">
+                    <div>
+
+
+                        <h2 class="secH ">React Developer</h2>
+                        <div class="row ">
+                            <div class="col-sm-6">
+                                <p><span>Role: Full Time</span></p>
+                                <p><span>Salary:</span> <strong>₹ 200000</strong> per month </p>
+                                <p><span>Duration:</span> 3 month</p>
+                            </div>
+                            <div class="col-sm-6">
+                                <p><span>Date Of Posting:</span> 2/7/2024</p>
+                                <p><span>Number of Applicants:</span> 100</p>
+                                <p><span>Remaining Number of Positions:</span> 30</p>
+                            </div>
+                        </div>
+                        <div class="stars">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+
+                        <div class="miniCardBtn">
+
+                            <button type="button" id="apply" class="btn logout" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal" data-bs-whatever="UPDATE DETAILS">Apply</button>
+
+                        </div>
+
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5 secH text-center w-100" id="exampleModalLabel">
+                                            Update
+                                            Details</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form>
+                                            <div class="mb-3">
+                                                <label for="ApplicationBio" class="col-form-label">Bio</label>
+                                                <textarea name="ApplicationBio" id="ApplicationBio" cols="30"
+                                                    rows="10"></textarea>
+                                            </div>
+
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn mybtn">submit</button>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+
+    <script>
+
+
+        let user = []
+
+
+        let t = JSON.parse(localStorage.getItem("token")).token;
+        const myJobs = () => {
+
+            fetch("http://localhost:4444/api/jobs", {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    'Authorization': `Bearer ${t}`,
+                },
+            })
+                .then((y) => y.json())
+                .then((y) => {
+                    // console.log(y);
+                    display(y);
+
+                    user = y;
+
+                    console.log(user)
+                });
+        };
+
+        // code for data mapping 
+
+
+        const display = (jobs) => {
+            let p = jobs.map(function (value, index) {
+
+                return `
+                
+                <div class="col-lg-6  textpart ">
+                    <div>
+
+<h2 class="secH ">${value.title}</h2>
+<div class="row ">
+    <div class="col-sm-6">
+        <p><span>Role:</span>${value.jobType}</p>
+        <p><span>Salary:</span> <strong>₹${value.salary}</strong> per month </p>
+        <p><span>Duration:</span>${value.duration}</p>
+    </div>
+    <div class="col-sm-6">
+        <p><span>Deadline:</span> ${value.deadline}</p>
+        <p><span>Number of Applicants:</span> ${value.maxApplicants}</p>
+        <p><span>Remaining Number of Positions:</span> ${value.maxPositions}</p>
+    </div>
+</div>
+<div class="stars">
+    <i class="fa-solid fa-star"></i>
+    <i class="fa-solid fa-star"></i>
+    <i class="fa-solid fa-star"></i>
+    <i class="fa-solid fa-star"></i>
+    <i class="fa-solid fa-star"></i>
+</div>
+
+<div class="miniCardBtn">
+
+    <button type="button" class="btn logout" data-bs-toggle="modal" data-bs-target="#modal${index}"
+        data-bs-whatever="UPDATE DETAILS">Apply</button>
+
+</div>
+
+<div class="modal fade" id="modal${index}" tabindex="-1" aria-labelledby="modalPlus${index}"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5 secH text-center w-100" id="modalPlus${index}">Update
+                    Details</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="ApplicationBio" class="col-form-label">Bio</label>
+                        <textarea name="ApplicationBio" id="ApplicationBio" cols="30"
+                            rows="10"></textarea>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn mybtn" onclick='Apply(${index})'>submit</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+`
+
+            })
+
+            document.getElementById("display").innerHTML = p.join("");
+        }
+
+
+
+        // apply for jobs code hear
+
+        let obj = {};
+        const Apply = (index) => {
+            let b = user[index]
+            obj = b;
+            let c = b._id
+            const url = 'http://localhost:4444/api/jobs/' + c + '/applications';
+            console.log(url);
+            let t = JSON.parse(localStorage.getItem("token")).token;
+            fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${t}`,
+                },
+            })
+                .then((y) => y.json())
+                .then((y) => {
+                    alert(y.message)
+                 document.getElementById("apply").innerHTML= 'Applied'
+                    
+               
+                });
+        }
+
+        // search jobs code hear
+
+        const search = () => {
+
+
+            let baseUrl = "http://localhost:4444/api/jobs?";
+            const searchValue = document.getElementById("search").value;
+            baseUrl += `q=${searchValue}`
+
+            fetch(baseUrl, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    'Authorization': `Bearer ${t}`,
+                },
+            })
+                .then((y) => y.json())
+                .then((y) => {
+                    a = y;
+                    display(y);
+
+                    console.log(y)
+                });
+        }
+
+
+        // filter data and shorting
+
+
+        const filterData = (e) => {
+            e.preventDefault();
+
+
+            const jobType1 = document.getElementById('FullTime')
+            const jobType2 = document.getElementById('PartTime')
+            const jobType3 = document.getElementById('WorkFromHome')
+
+            let baseUrl = "http://localhost:4444/api/jobs?";
+
+            // code for filter job type
+
+            const jobTypes = [jobType1, jobType2, jobType3];
+            const checkedJobTypes = jobTypes.filter(jobType => jobType.checked);
+
+            if (checkedJobTypes.length === 1) {
+                baseUrl += `jobType=${checkedJobTypes[0].value}`;
+            } else if (checkedJobTypes.length > 1) {
+                baseUrl += checkedJobTypes.map(jobType => `jobType=${jobType.value}`).join('&');
+            }
+
+            console.log(baseUrl)
+
+            // code for filter salary
+
+            const minsalary = document.getElementById("quantity").value;
+            const maxsalary = document.getElementById("quantity2").value;
+
+            if (minsalary && maxsalary) {
+                baseUrl += `&salaryMin=${minsalary}&salaryMax=${maxsalary}`;
+            }
+
+            console.log(baseUrl);
+
+            // code for filter duration
+            const duration = document.getElementById("Duration")
+
+            if (duration.value) {
+
+                baseUrl += `&duration=${duration.value}&`
+            }
+            console.log(baseUrl);
+
+            const salaryasc = document.getElementById("Salary")
+            const durationasc = document.getElementById("CheckDuration")
+            const rating = document.getElementById("Rating")
+
+            const asc = [salaryasc, durationasc, rating];
+            const checkedasc = asc.filter(ascType => ascType.checked);
+
+            if (checkedasc.length === 1) {
+                baseUrl += `asc=${checkedasc[0].value}`;
+            } else if (checkedasc.length > 1) {
+                baseUrl += checkedasc.map(ascType => `asc=${ascType.value}`).join('&');
+            }
+            console.log(baseUrl)
+
+
+
+
+            //     let baseUrl = "http://localhost:4444/api/jobs?"
+
+            //     let jobType1 = document.getElementById('FullTime')
+            //     let jobType2 = document.getElementById('PartTime')
+            //     let jobType3 = document.getElementById('WorkFromHome')
+            //     let minsalary = document.getElementById("quantity").value;
+            //     let maxsalary = document.getElementById("quantity2").value;
+
+            //     // filter for job type
+
+            //     if (jobType1.checked && !jobType2.checked && !jobType3.checked && !minsalary && !maxsalary) {
+            //         baseUrl += ("jobType=" + jobType1.value)
+            //         console.log(baseUrl)
+            //         console.log('http://localhost:4444/api/jobs?jobType=Full%20Time')
+            //     }
+            //     else if (jobType2.checked && !jobType1.checked && !jobType3.checked && !minsalary && !maxsalary) {
+            //         baseUrl += ("jobType=" + jobType2.value)
+            //         console.log(baseUrl)
+            //         console.log('http://localhost:4444/api/jobs?jobType=Part%20Time')
+            //     }
+            //     else if (jobType3.checked && !jobType1.checked && !jobType2.checked && !minsalary && !maxsalary) {
+            //         baseUrl += ("jobType=" + jobType3.value)
+            //         console.log(baseUrl)
+            //         console.log('http://localhost:4444/api/jobs?jobType=Work%20From%20Home')
+            //     }
+
+            //     else if (jobType1.checked && jobType2.checked && !jobType3.checked && !minsalary && !maxsalary) {
+            //         baseUrl += ("jobType=" + jobType1.value + '&' + 'jobType=' + jobType2.value)
+            //         console.log(baseUrl)
+
+            //         console.log('http://localhost:4444/api/jobs?jobType=Full%20Time&jobType=Part%20Time')
+            //     }
+            //     else if (jobType1.checked && jobType3.checked && !jobType2.checked && !minsalary && !maxsalary) {
+            //         baseUrl += ("jobType=" + jobType1.value + '&' + 'jobType=' + jobType3.value)
+            //         console.log(baseUrl)
+
+            //         console.log('http://localhost:4444/api/jobs?jobType=Full%20Time&jobType=Work%20From%20Home')
+            //     }
+            //     else if (jobType2.checked && jobType3.checked && !jobType1.checked && !minsalary && !maxsalary) {
+            //         baseUrl += ("jobType=" + jobType2.value + '&' + 'jobType=' + jobType3.value)
+            //         console.log(baseUrl)
+
+            //         console.log('http://localhost:4444/api/jobs?jobType=Part%20Time&jobType=Work%20From%20Home')
+            //     }
+            //     else if (jobType2.checked && jobType3.checked && jobType1.checked && !minsalary && !maxsalary) {
+            //         baseUrl += ("jobType=" + jobType1.value + '&' + 'jobType=' + jobType2.value + '&' + 'jobType=' + jobType3.value)
+            //         console.log(baseUrl)
+
+            //         console.log('http://localhost:4444/api/jobs?jobType=Full%20Time&jobType=Part%20Time&jobType=Work%20From%20Home')
+            //     }
+
+            //     //  filter for salary 
+
+            //    else if (maxsalary && minsalary && !jobType1.checked && !jobType2.checked && !jobType3.checked ) {
+            //         baseUrl += ("salaryMin=" + minsalary + "&" + "salaryMax=" + maxsalary)
+            //         console.log(baseUrl)
+            //         console.log("http://localhost:4444/api/jobs?salaryMin=15000&salaryMax=72000")
+            //     }
+
+            //     else if (jobType1.checked && maxsalary && minsalary && !jobType2.checked && !jobType3.checked ) {
+            //         baseUrl += ("jobType=" + jobType1.value + '&' + "salaryMin=" + minsalary + "&" + "salaryMax=" + maxsalary)
+            //         console.log(baseUrl)
+            //         console.log("http://localhost:4444/api/jobs?jobType=Full%20Time&salaryMin=50000&salaryMax=85000")
+            //     }
+            //     else if (jobType2.checked && maxsalary && minsalary && !jobType1.checked && !jobType3.checked ) {
+            //         baseUrl += ("jobType=" + jobType2.value + '&' + "salaryMin=" + minsalary + "&" + "salaryMax=" + maxsalary)
+            //         console.log(baseUrl)
+            //         console.log("http://localhost:4444/api/jobs?jobType=Part%20Time&salaryMin=50000&salaryMax=85000")
+            //     }
+            //     else if (jobType3.checked && maxsalary && minsalary && !jobType1.checked && !jobType2.checked ) {
+            //         baseUrl += ("jobType=" + jobType3.value + '&' + "salaryMin=" + minsalary + "&" + "salaryMax=" + maxsalary)
+            //         console.log(baseUrl)
+            //         console.log("http://localhost:4444/api/jobs?jobType=Part%20Time&salaryMin=50000&salaryMax=85000")
+            //     }
+            //     else if (jobType1.checked && maxsalary && minsalary && !jobType3.checked && jobType2.checked ) {
+            //         baseUrl += ("jobType=" + jobType1.value + '&'+"jobType=" + jobType2.value +  '&' + "salaryMin=" + minsalary + "&" + "salaryMax=" + maxsalary)
+            //         console.log(baseUrl)
+            //         console.log("http://localhost:4444/api/jobs?jobType=Full%20Time&jobType=Part%20Time&salaryMin=25000&salaryMax=98000")
+            //     }
+            //     else if (jobType1.checked && maxsalary && minsalary && jobType3.checked && !jobType2.checked ) {
+            //         baseUrl += ("jobType=" + jobType1.value + '&'+"jobType=" + jobType3.value +  '&' + "salaryMin=" + minsalary + "&" + "salaryMax=" + maxsalary)
+            //         console.log(baseUrl)
+            //         console.log("http://localhost:4444/api/jobs?jobType=Full%20Time&jobType=Work%20From%20Home&salaryMin=25000&salaryMax=99000")
+            //     }
+            //     else if (jobType1.checked && maxsalary && minsalary && jobType3.checked && jobType2.checked ) {
+            //         baseUrl += ("jobType=" + jobType1.value + '&'+"jobType=" + jobType2.value +  '&'+"jobType=" + jobType3.value+'&' + "salaryMin=" + minsalary + "&" + "salaryMax=" + maxsalary)
+            //         console.log(baseUrl)
+            //         console.log("http://localhost:4444/api/jobs?jobType=Full%20Time&jobType=Part%20Time&jobType=Work%20From%20Home&salaryMin=25000&salaryMax=98000")
+            //     }
+
+            // filter for duration
+
+            fetch(baseUrl, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    'Authorization': `Bearer ${t}`,
+                },
+            })
+                .then((y) => y.json())
+                .then((y) => {
+                    a = y;
+                    display(y);
+
+                    console.log(y)
+                });
+
+
+        }
+
+
+
+        let obj1 = {};
+
+        const getData = (index) => {
+            let jobDetails = user[index];
+            obj1 = jobDetails;
+            console.log(obj1)
+
+        }
+
+
+
+
+
+
+
+
+
+
+    </script>
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+
+</html>

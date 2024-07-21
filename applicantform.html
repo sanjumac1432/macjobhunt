@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://kit.fontawesome.com/52ca9e0df4.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.html"><img src="image/LOGO.svg" alt="Logo"></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="login.html">LOGIN</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="signup.html">RECRUITER</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <section class="Signup">
+        <div class="container">
+            <form class="row Signupform  g-3  justify-content-center m-4  ">
+                <div class="col-lg-5 col-md-6 col-sm-8 p-5  wrap">
+                    <div class="col-12">
+                        <h1 class="h1 secH text-center">APPLICANT</h1>
+
+                        <div class="mar">
+                            <label for="Category">Category</label>
+                            <input type="text" value="applicant">
+                        </div>
+                        <div class="mar">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" placeholder="Name" name="name" required>
+                        </div>
+
+                        <div class="mar">
+                            <label for="uname">Email</label>
+                            <input type="text" id="email" placeholder="Email" name="uname" required>
+                        </div>
+                        <div class="mar pas">
+                            <label for="psw">Password</label>
+                            <i class="fa-solid fa-eye-slash"></i>
+                            <i class="fa-solid fa-eye"></i>
+                            <input type="password" id="password" placeholder="Enter Password" name="psw" required>
+                        </div>
+                        <div class="Applicant">
+                            <div id="education">
+                                <div class="row inst" id="education-info">
+
+                                    <div class="col-6 mar">
+                                        <label for="InstitutionName">Institution Name</label>
+                                        <input type="text" id="InstitutionName" name="InstitutionName">
+                                    </div>
+                                    <div class="col-3 mar">
+                                        <label for="StartYear">Start Year</label>
+                                        <input type="text" id="StartYear" name="StartYear">
+                                    </div>
+                                    <div class="col-3 mar">
+                                        <label for="EndYear">End Year</label>
+                                        <input type="text" id="EndYear" name="EndYear">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 text-center mt-3 mt-sm-4 d-flex">
+                                <button class="btn btn-primary w-50" type="submit" onclick="addMoreEducation()">
+                                    Add Institution</button>
+                                    <button class="btn btn-primary w-50" type="submit" onclick="edu(event)">
+                                         Save Details</button>
+                            </div>
+                            <div class="mar ">
+                                <label for="Skills">Skills</label>
+                                <input type="text" id="Skills" name="Skills">
+                                <p>Please enter to add skills</p>
+                            </div>
+
+                            <div class="row inst">
+
+                                <div class="col-3 mar">
+
+                                    <input type="file" name="File" class="choose" title="Add a File">
+                                </div>
+                                <div class="col-6 mar">
+                                    <input type="text" name="FileName">
+                                </div>
+                                <div class="col-3 mar">
+                                    <button class="Upload" type="submit" name="Upload" value="">Submit</button>
+                                </div>
+                            </div>
+                            <div class="row inst">
+
+                                <div class="col-3 mar">
+
+                                    <input type="file" name="File" class="choose" title="Add a File">
+                                </div>
+                                <div class="col-6 mar">
+                                    <input type="text" name="FileName">
+                                </div>
+                                <div class="col-3 mar">
+                                    <button class="Upload" type="submit" name="Upload" value="">Submit</button>
+                                </div>
+
+                                <div class="col-12 text-center mt-3 mt-sm-4">
+                                    <button class="btn btn-primary w-100 " type="button"
+                                        onclick="signup(event)">register</button>
+                                </div>
+                            </div>
+                        </div>
+            </form>
+        </div>
+
+
+    </section>
+
+    <script>
+
+        let b = []
+        let a = {}
+        const edu = (e) => {
+            e.preventDefault();
+            a = {
+
+                institutionName: document.getElementById("InstitutionName").value,
+                startYear: document.getElementById("StartYear").value,
+                endYear: document.getElementById("EndYear").value
+            }
+            b.push(a)
+            console.log(b)
+        }
+
+        const signup = (e) => {
+
+            e.preventDefault();
+            const obj = {
+                bio: '',
+                name: document.getElementById("name").value,
+                email: document.getElementById("email").value,
+                password: document.getElementById("password").value,
+                type: 'applicant',
+                education: b,
+                profile: '',
+                resume: '',
+                // contactNumber: document.getElementById("contactNumber").value,
+                skills: document.getElementById("Skills").value
+
+            }
+            fetch("http://localhost:4444/auth/signup", {
+                method: "POST",
+                headers: {
+                    'Content-Type': "application/json"
+                },
+                body: JSON.stringify(obj)
+            }).then(y => y.json()).then(y => {
+
+                if (y.type) {
+                    alert('logged in successfully')
+                    location.href = 'login.html'
+                }
+                else if (y.name) {
+                    console.log(y.name)
+
+                }
+                else if (y.message) {
+                    console.log(y.message)
+                }
+            })
+        }
+
+        // add education filed
+
+        let addMoreEducation = () => {
+
+            let edu = document.getElementById("education-info").cloneNode(true);
+            let p = edu.getElementsByTagName("input");
+            let p1 = document.createElement("button");
+            p1.classList.add('removebutton')
+            p1.innerHTML = "Remove";
+
+            p1.onclick = (e) => {
+                removeElement(e);
+            };
+            for (let index = 0; index < p.length; index++) {
+                p[index].value = "";
+            };
+            edu.appendChild(p1);
+            document.getElementById("education").appendChild(edu);
+        }
+        const removeElement = (p) => {
+            p.target.parentElement.remove()
+        };
+
+
+
+    </script>
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+
+</html>

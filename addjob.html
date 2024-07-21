@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="image/FeviconLogo.svg">
+  <title>Workaholics</title>
+  <script src="https://kit.fontawesome.com/52ca9e0df4.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+<header>
+  <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="index.html"><img src="image/LOGO.svg" alt="Logo"></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="index.html">HOME</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="addjob.html"> ADD JOBS</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="myjobs.html">MY JOBS</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">EMPLOYEES</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="profile.html">PROFILE</a>
+          </li>
+       
+        </ul>
+        <a class="nav-link logout2" href="login.html">LOGOUT</a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- add job section start -->
+<section class="Login">
+    <div class="container">
+      <form class="row Loginform  g-3  justify-content-center m-4  ">
+        <div class="col-lg-4 col-md-6 col-sm-8 p-5  wrap">
+          <div class="col-12">
+            <h1 class="h1 secH text-center">Add Job</h1>
+            <div class="mar">
+
+              <label for="title">Title</label>
+              <input type="text" id="title" placeholder="Enter title" name="title" required>
+
+            </div>
+            <div class="mar">
+              <label for="applicant">max Applicants</label>
+              <input type="number" id="maxappliacants" placeholder="Enter max applicant" name="applicant" required>
+            </div>
+            <div class="mar">
+                <label for="posting">date of Posting</label>
+                <input type="date" id="dateofposting" placeholder="Enter date of posting" name="posting" required>
+              </div>
+              <div class="mar">
+                <label for="position">max Position</label>
+                <input type="number" id="maxpositions" placeholder="Enter max position" name="position" required>
+              </div>
+              <div class="mar">
+                <label for="deadline">Deadline</label>
+                <input type="date" id="deadline" placeholder="Enter deadline" name="deadline" required>
+              </div>
+              <div class="mar">
+                <label for="skill">Skills Set</label>
+                <input type="text" id="skillset" placeholder="Enter skill set" name="skill" required>
+              </div>
+              <div class="mar">
+                <label for="jobtype">Job Type</label>
+                <input type="text" id="jobtype" placeholder="Enter job type" name="jobtype" required>
+              </div>
+
+              <div class="mar">
+                <label for="duration">Duration</label>
+                <!-- <input type="text" id="duration" placeholder="Enter duration" name="duration" required> -->
+                <select  id="duration">
+                  <option value="0">Flexible</option>
+                  <option value="1">1 month</option>
+                  <option value="2">2 month</option>
+                  <option value="3">3 month</option>
+                  <option value="4">4 month</option>
+                  <option value="5">5 month</option>
+                  <option value="6">6 month</option>
+                </select>
+              </div>
+              <div class="mar">
+                <label for="salary">Salary</label>
+                <input type="number" id="salary" placeholder="Enter salary" name="salary" required>
+              </div>
+              <div class="mar">
+                <label for="rating">Rating</label>
+                <input type="number" id="rating" placeholder="Enter rating" name="rating" required>
+              </div>
+
+          </div>
+          <div class="col-12 text-center mt-3 mt-sm-4">
+            <button class="btn mybtn w-100" type="button" onclick="addjob(event)"> Add Job</button>
+          </div>
+        </div>
+
+      </form>
+
+
+
+    </div>
+
+
+  </section>
+<!-- add job section End -->
+
+<script>
+  const addjob = (e)=>{
+
+e.preventDefault();
+
+const obj = {
+  title : document.getElementById("title").value,
+  skill : document.getElementById("skillset").value,
+  jobType : document.getElementById("jobtype").value,
+  duration : document.getElementById("duration").value,
+  salary : document.getElementById("salary").value,
+  deadline : document.getElementById("deadline").value,
+  dateOfPosting: document.getElementById("dateofposting").value,
+  maxApplicants : document.getElementById("maxappliacants").value,
+  maxPositions : document.getElementById("maxpositions") .value
+
+}
+
+let data = JSON.parse(localStorage.getItem('token')).token;
+
+
+fetch("http://localhost:4444/api/jobs",{
+
+method:"POST",
+headers :{
+  'Content-Type' : 'application/json',
+ 'Authorization' : `Bearer ${data}`,
+
+},
+body : JSON.stringify(obj),
+}).then((y)=>{
+  return y.json();
+}).then((y)=>{
+  console.log(y)
+  location.href= 'myjobs.html';
+ 
+});
+
+}
+</script>
+  
+
+
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/script.js"></script>
+</body>
+
+</html>
